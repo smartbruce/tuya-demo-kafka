@@ -19,19 +19,20 @@ public class KafkaConsumer {
 	private static final Logger logger = LoggerFactory.getLogger(KafkaConsumer.class);
 
 	public static void main(String[] args) {
-	    String appKey="";
+	    String appKey="";//填APPKEY
 		org.apache.kafka.clients.consumer.KafkaConsumer<String, String> consumer = null;
 		Configuration configuration = Configuration.getConfiguration();
 		Configuration.setConfiguration(null);
 		try {
 			java.security.Security.setProperty("login.configuration.provider", "com.tuya.demo.kafka.SASLConfiguration");
+
 			Properties props = new Properties();
 			props.put("bootstrap.servers", "kafka.cloud.tuyacn.com:8092");
-			props.put("group.id", "demo_group");
+			props.put("group.id", "demo_group");//根据实际情况填写
 
 			InetAddress netAddress = InetAddress.getLocalHost();
 			String clientId = "demo_client" + "_" + netAddress.getHostAddress();
-			props.put("client.id", clientId);
+			props.put("client.id", clientId);//根据实际情况填写，一般格式:prefix_ip，带上IP好区分
 			props.put("enable.auto.commit", "true");
 			props.put("auto.commit.interval.ms", "1000");
 			props.put("session.timeout.ms", "30000");
